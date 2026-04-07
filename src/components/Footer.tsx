@@ -1,17 +1,14 @@
 "use client";
 
-import { AtSign, Camera, Globe } from "lucide-react";
+import { AtSign, Camera } from "lucide-react";
 import { useSiteData } from "./SiteDataContext";
-
-const defaultSocialLinks = [
-  { icon: AtSign, href: "https://x.com/sora_manga_test", label: "Twitter" },
-  { icon: Camera, href: "https://instagram.com/sora_manga_test", label: "Instagram" },
-];
 
 export default function Footer() {
   const data = useSiteData();
   const artistName = data?.artistName || "Sora";
-  const socialLinks = defaultSocialLinks;
+  const socialLinks: { icon: typeof AtSign; href: string; label: string }[] = [];
+  if (data?.snsX) socialLinks.push({ icon: AtSign, href: data.snsX.startsWith("http") ? data.snsX : `https://x.com/${data.snsX.replace("@", "")}`, label: "X (Twitter)" });
+  if (data?.snsInstagram) socialLinks.push({ icon: Camera, href: data.snsInstagram.startsWith("http") ? data.snsInstagram : `https://instagram.com/${data.snsInstagram.replace("@", "")}`, label: "Instagram" });
   return (
     <footer
       className="relative overflow-hidden"
@@ -135,12 +132,12 @@ export default function Footer() {
             className="text-sm font-black uppercase tracking-wider"
             style={{ color: "rgba(255,255,255,0.6)" }}
           >
-            {artistName}<span style={{ color: "var(--cp-yellow)" }}>{data ? "" : "COMICS"}</span>
+            {artistName}
           </span>
 
           {/* Nav links */}
           <nav className="flex gap-6">
-            {["Works", "About", "Contact"].map((label) => (
+            {["About", "Contact"].map((label) => (
               <a
                 key={label}
                 href={`#${label.toLowerCase()}`}
@@ -157,7 +154,7 @@ export default function Footer() {
             className="text-xs font-bold"
             style={{ color: "rgba(255,255,255,0.3)" }}
           >
-            © {new Date().getFullYear()} {artistName}. All rights reserved.
+            © 2026 {artistName}. All rights reserved.
           </p>
         </div>
 

@@ -30,9 +30,7 @@ export const siteConfig = {
     title: "GALLERY",
     subtitle: "作品ギャラリー",
     description: "",
-    works: [
-
-    ],
+    works: [] as { src: string; title: string }[],
     initialDisplay: 8,
   },
 
@@ -58,7 +56,6 @@ export const siteConfig = {
   },
 
   nav: [
-    { label: "Gallery", href: "#gallery" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],

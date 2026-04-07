@@ -2,22 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, AtSign, Camera, Globe, BookOpen, Link2 } from "lucide-react";
+import { Send, AtSign, Camera } from "lucide-react";
 import { useSiteData } from "./SiteDataContext";
 import type { SiteData } from "@/lib/site-data";
-
-const defaultSocialLinks = [
-  { icon: AtSign, label: "Twitter / X", handle: "@sora_manga_test", color: "var(--cp-blue)" },
-  { icon: Camera, label: "Instagram", handle: "@sora_manga_test", color: "var(--cp-red)" },
-];
 
 function buildSocialLinks(data: SiteData) {
   const links: { icon: typeof AtSign; label: string; handle: string; color: string; href: string }[] = [];
   if (data.snsX) links.push({ icon: AtSign, label: "X (Twitter)", handle: data.snsX, color: "var(--cp-blue)", href: data.snsX.startsWith("http") ? data.snsX : `https://x.com/${data.snsX.replace("@", "")}` });
   if (data.snsInstagram) links.push({ icon: Camera, label: "Instagram", handle: data.snsInstagram, color: "var(--cp-red)", href: data.snsInstagram.startsWith("http") ? data.snsInstagram : `https://instagram.com/${data.snsInstagram.replace("@", "")}` });
-  if (data.snsPixiv) links.push({ icon: BookOpen, label: "Pixiv", handle: data.snsPixiv, color: "var(--cp-blue)", href: data.snsPixiv.startsWith("http") ? data.snsPixiv : `https://pixiv.net/users/${data.snsPixiv}` });
-  if (data.snsNote) links.push({ icon: Globe, label: "note", handle: data.snsNote, color: "var(--cp-yellow)", href: data.snsNote.startsWith("http") ? data.snsNote : `https://note.com/${data.snsNote}` });
-  if (data.snsOther) links.push({ icon: Link2, label: "Other", handle: data.snsOther, color: "var(--cp-yellow)", href: data.snsOther.startsWith("http") ? data.snsOther : `#` });
   return links;
 }
 
@@ -55,10 +47,7 @@ export default function ContactSection() {
   const data = useSiteData();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const socialLinks = data ? buildSocialLinks(data) : [
-    { ...defaultSocialLinks[0], href: "https://x.com/sora_manga_test" },
-    { ...defaultSocialLinks[1], href: "https://instagram.com/sora_manga_test" },
-  ];
+  const socialLinks = data ? buildSocialLinks(data) : [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +90,7 @@ export default function ContactSection() {
               }}
             >
               <span className="text-xs font-black uppercase tracking-widest" style={{ color: "var(--cp-text)" }}>
-                Chapter 03
+                Chapter 02
               </span>
             </div>
             <div
@@ -322,52 +311,35 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            {/* Response time panel */}
-            <div
-              className="p-5"
-              style={{
-                border: "3px solid var(--cp-border)",
-                backgroundColor: "var(--cp-surface)",
-                boxShadow: "5px 5px 0 var(--cp-border)",
-              }}
-            >
+            {/* Email link */}
+            {data?.email && (
               <div
-                className="mb-3 inline-block px-3 py-1 text-xs font-black uppercase tracking-wider text-white"
-                style={{ backgroundColor: "var(--cp-blue)", borderRadius: "2px" }}
+                className="p-5"
+                style={{
+                  border: "3px solid var(--cp-border)",
+                  backgroundColor: "var(--cp-surface)",
+                  boxShadow: "5px 5px 0 var(--cp-border)",
+                }}
               >
-                ℹ INFO
+                <div
+                  className="mb-3 inline-block px-3 py-1 text-xs font-black uppercase tracking-wider text-white"
+                  style={{ backgroundColor: "var(--cp-blue)", borderRadius: "2px" }}
+                >
+                  ✉ EMAIL
+                </div>
+                <a
+                  href={`mailto:${data.email}`}
+                  className="flex items-center gap-3 px-3 py-2 text-sm font-bold hover:underline"
+                  style={{
+                    borderLeft: "3px solid var(--cp-yellow)",
+                    backgroundColor: "#f8f8f0",
+                    color: "var(--cp-text)",
+                  }}
+                >
+                  {data.email}
+                </a>
               </div>
-              <div className="space-y-3">
-                {[
-                  { icon: "⚡", label: "返信速度", value: "通常2〜3営業日" },
-                  { icon: "💼", label: "お仕事", value: "キャラデザ・漫画制作・監修" },
-                  { icon: "🤝", label: "コラボ", value: "歓迎！まずはDMで" },
-                  { icon: "📍", label: "対応地域", value: "全国・海外OK（英語可）" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center gap-3 px-3 py-2"
-                    style={{
-                      borderLeft: "3px solid var(--cp-yellow)",
-                      backgroundColor: "#f8f8f0",
-                    }}
-                  >
-                    <span className="text-xl">{item.icon}</span>
-                    <div>
-                      <p
-                        className="text-[10px] font-black uppercase tracking-wider"
-                        style={{ color: "var(--cp-text-muted)" }}
-                      >
-                        {item.label}
-                      </p>
-                      <p className="text-sm font-bold" style={{ color: "var(--cp-text)" }}>
-                        {item.value}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Social links — circular panels */}
             {socialLinks.length > 0 && <div>

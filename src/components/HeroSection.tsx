@@ -69,12 +69,8 @@ function StarBurst({
 export default function HeroSection() {
   const data = useSiteData();
   const artistName = data?.artistName || "Sora";
-  const subtitleText = data?.subtitle || "マンガ作家 ＆ イラストレーター";
-  const catchcopyText = data?.catchcopy || "";
-  const heroImage = data?.heroImage;
-
-  // Default description when no data
-  const defaultDescription = "物語は、一コマから始まる";
+  const subtitleText = data?.subtitle || "漫画家 & イラストレーター";
+  const catchcopyText = data?.catchcopy || "物語は、一コマから始まる";
 
   return (
     <section
@@ -228,7 +224,7 @@ export default function HeroSection() {
             className="text-base font-bold leading-relaxed"
             style={{ color: "var(--cp-text)" }}
           >
-            {catchcopyText || defaultDescription}
+            {catchcopyText}
           </p>
         </motion.div>
 
@@ -240,7 +236,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.55 }}
         >
           <a
-            href="#works"
+            href="#about"
             className="relative px-8 py-3.5 text-sm font-black uppercase tracking-wider text-white transition-all duration-150 hover:translate-x-[-2px] hover:translate-y-[-2px]"
             style={{
               backgroundColor: "var(--cp-red)",
@@ -249,10 +245,10 @@ export default function HeroSection() {
               boxShadow: "5px 5px 0 var(--cp-border)",
             }}
           >
-            作品を読む ▶
+            ABOUT ME
           </a>
           <a
-            href="#about"
+            href="#contact"
             className="relative px-8 py-3.5 text-sm font-black uppercase tracking-wider transition-all duration-150 hover:translate-x-[-2px] hover:translate-y-[-2px]"
             style={{
               backgroundColor: "var(--cp-yellow)",
@@ -262,58 +258,58 @@ export default function HeroSection() {
               color: "var(--cp-text)",
             }}
           >
-            ABOUT ME
+            CONTACT
           </a>
         </motion.div>
 
-        {/* Stats row — comic panel style */}
-        <motion.div
-          className="mt-14 grid grid-cols-3 gap-0 mx-auto max-w-sm"
-          style={{
-            border: "3px solid var(--cp-border)",
-            boxShadow: "5px 5px 0 var(--cp-border)",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          {(data
-            ? (data.stats && data.stats.length > 0
-                ? data.stats.slice(0, 3).map((s) => {
-                    const parts = s.split(":");
-                    return { num: parts[0] || s, label: parts[1] || "" };
-                  })
-                : [])
-            : [
-                { num: "500+", label: "作品数" },
-                { num: "10K+", label: "フォロワー" },
-                { num: "5年", label: "制作歴" },
-              ]
-          ).map((stat, i) => (
-            <div
-              key={stat.label}
-              className="py-4 text-center"
-              style={{
-                borderRight: i < 2 ? "3px solid var(--cp-border)" : "none",
-                backgroundColor:
-                  i === 0 ? "var(--cp-yellow)" : i === 1 ? "var(--cp-surface)" : "var(--cp-red)",
-              }}
-            >
-              <p
-                className="text-xl font-black"
-                style={{ color: i === 2 ? "#ffffff" : "var(--cp-text)" }}
+        {/* Stats row — comic panel style (hidden when no stats) */}
+        {(!data || (data.stats && data.stats.length > 0)) && (
+          <motion.div
+            className="mt-14 grid grid-cols-3 gap-0 mx-auto max-w-sm"
+            style={{
+              border: "3px solid var(--cp-border)",
+              boxShadow: "5px 5px 0 var(--cp-border)",
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            {(data
+              ? data.stats!.slice(0, 3).map((s) => {
+                  const parts = s.split(":");
+                  return { num: parts[0] || s, label: parts[1] || "" };
+                })
+              : [
+                  { num: "500+", label: "作品数" },
+                  { num: "10K+", label: "フォロワー" },
+                  { num: "5年", label: "制作歴" },
+                ]
+            ).map((stat, i) => (
+              <div
+                key={stat.label}
+                className="py-4 text-center"
+                style={{
+                  borderRight: i < 2 ? "3px solid var(--cp-border)" : "none",
+                  backgroundColor:
+                    i === 0 ? "var(--cp-yellow)" : i === 1 ? "var(--cp-surface)" : "var(--cp-red)",
+                }}
               >
-                {stat.num}
-              </p>
-              <p
-                className="text-[10px] font-bold uppercase tracking-wide"
-                style={{ color: i === 2 ? "rgba(255,255,255,0.85)" : "var(--cp-text-muted)" }}
-              >
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </motion.div>
+                <p
+                  className="text-xl font-black"
+                  style={{ color: i === 2 ? "#ffffff" : "var(--cp-text)" }}
+                >
+                  {stat.num}
+                </p>
+                <p
+                  className="text-[10px] font-bold uppercase tracking-wide"
+                  style={{ color: i === 2 ? "rgba(255,255,255,0.85)" : "var(--cp-text-muted)" }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       {/* Scroll indicator */}

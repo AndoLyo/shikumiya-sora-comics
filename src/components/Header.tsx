@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSiteData } from "./SiteDataContext";
 
 const navItems = [
-  { label: "WORKS", href: "#works" },
   { label: "ABOUT", href: "#about" },
   { label: "CONTACT", href: "#contact" },
 ];
