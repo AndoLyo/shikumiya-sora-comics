@@ -4,9 +4,8 @@ import { AtSign, Camera, Globe } from "lucide-react";
 import { useSiteData } from "./SiteDataContext";
 
 const defaultSocialLinks = [
-  { icon: AtSign, href: "#", label: "Twitter" },
-  { icon: Camera, href: "#", label: "Instagram" },
-  { icon: Globe, href: "#", label: "Website" },
+  { icon: AtSign, href: "https://x.com/sora_manga_test", label: "Twitter" },
+  { icon: Camera, href: "https://instagram.com/sora_manga_test", label: "Instagram" },
 ];
 
 export default function Footer() {

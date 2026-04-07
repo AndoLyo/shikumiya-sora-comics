@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteDataProvider } from "@/lib/SiteDataContext";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -8,7 +9,8 @@ import Footer from "@/components/Footer";
 
 export default function ComicPanelPage() {
   return (
-    <div
+    <SiteDataProvider>
+      <div
       className="comic-panel-template"
       style={
         {
@@ -33,5 +35,6 @@ export default function ComicPanelPage() {
       </main>
       <Footer />
     </div>
+    </SiteDataProvider>
   );
 }

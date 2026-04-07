@@ -13,8 +13,8 @@ const navItems = [
 
 export default function Header() {
   const data = useSiteData();
-  const artistName = data?.artistName || "MANGA";
-  const artistNameAccent = data ? "" : "PORT";
+  const artistName = data?.artistName || "Sora";
+  const artistNameAccent = "";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
