@@ -2,24 +2,38 @@
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import GallerySection from "@/components/GallerySection";
+import WorksSection from "@/components/WorksSection";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import ScrollProgress from "@/components/ScrollProgress";
 
-export default function Home() {
+export default function ComicPanelPage() {
   return (
-    <>
-      <ScrollProgress />
+    <div
+      className="comic-panel-template"
+      style={
+        {
+          "--cp-bg": "#FFFEF5",
+          "--cp-surface": "#FFFFFF",
+          "--cp-text": "#1A1A1A",
+          "--cp-text-muted": "#666666",
+          "--cp-red": "#E63946",
+          "--cp-blue": "#2563EB",
+          "--cp-yellow": "#FFC107",
+          "--cp-border": "#1A1A1A",
+          backgroundColor: "#FFFEF5",
+          fontFamily: "'Helvetica Neue', Arial, sans-serif",
+        } as React.CSSProperties
+      }
+    >
       <Header />
-      <main id="main-content">
+      <main>
         <HeroSection />
-        <GallerySection />
+        <WorksSection />
         <AboutSection />
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
