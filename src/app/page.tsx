@@ -2,7 +2,6 @@
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import WorksSection from "@/components/WorksSection";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -29,7 +28,6 @@ export default function ComicPanelPage() {
       <Header />
       <main>
         <HeroSection />
-        <WorksSection />
         <AboutSection />
         <ContactSection />
       </main>
