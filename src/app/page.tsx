@@ -24,29 +24,29 @@ export default function ComicPanelPage() {
   return (
     <SiteDataProvider data={siteData}>
       <div
-      className="comic-panel-template"
-      style={
-        {
-          "--cp-bg": "#FFFEF5",
-          "--cp-surface": "#FFFFFF",
-          "--cp-text": "#1A1A1A",
-          "--cp-text-muted": "#666666",
-          "--cp-red": "#E63946",
-          "--cp-blue": "#2563EB",
-          "--cp-yellow": "#FFC107",
-          "--cp-border": "#1A1A1A",
-          backgroundColor: "#FFFEF5",
-          fontFamily: "'Helvetica Neue', Arial, sans-serif",
-        } as React.CSSProperties
-      }
-    >
-      <Header />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
+        className="comic-panel-template"
+        style={
+          {
+            "--cp-bg": "#FFFEF5",
+            "--cp-surface": "#FFFFFF",
+            "--cp-text": "#1A1A1A",
+            "--cp-text-muted": "#666666",
+            "--cp-red": "#E63946",
+            "--cp-blue": "#2563EB",
+            "--cp-yellow": "#FFC107",
+            "--cp-border": "#1A1A1A",
+            backgroundColor: "#FFFEF5",
+            fontFamily: "'Helvetica Neue', Arial, sans-serif",
+          } as React.CSSProperties
+        }
+      >
+        <Header />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <ContactSection />
+        </main>
+        <Footer />
       </div>
     </SiteDataProvider>
   );

@@ -6,10 +6,20 @@ import { Send, AtSign, Camera } from "lucide-react";
 import { useSiteData } from "./SiteDataContext";
 import type { SiteData } from "@/lib/site-data";
 
+function extractHandle(url: string): string {
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split("/").filter(Boolean);
+    return parts.length > 0 ? `@${parts[parts.length - 1]}` : url;
+  } catch {
+    return url.startsWith("@") ? url : `@${url}`;
+  }
+}
+
 function buildSocialLinks(data: SiteData) {
   const links: { icon: typeof AtSign; label: string; handle: string; color: string; href: string }[] = [];
-  if (data.snsX) links.push({ icon: AtSign, label: "X (Twitter)", handle: data.snsX, color: "var(--cp-blue)", href: data.snsX.startsWith("http") ? data.snsX : `https://x.com/${data.snsX.replace("@", "")}` });
-  if (data.snsInstagram) links.push({ icon: Camera, label: "Instagram", handle: data.snsInstagram, color: "var(--cp-red)", href: data.snsInstagram.startsWith("http") ? data.snsInstagram : `https://instagram.com/${data.snsInstagram.replace("@", "")}` });
+  if (data.snsX) links.push({ icon: AtSign, label: "X (Twitter)", handle: extractHandle(data.snsX), color: "var(--cp-blue)", href: data.snsX.startsWith("http") ? data.snsX : `https://x.com/${data.snsX.replace("@", "")}` });
+  if (data.snsInstagram) links.push({ icon: Camera, label: "Instagram", handle: extractHandle(data.snsInstagram), color: "var(--cp-red)", href: data.snsInstagram.startsWith("http") ? data.snsInstagram : `https://instagram.com/${data.snsInstagram.replace("@", "")}` });
   return links;
 }
 
